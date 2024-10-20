@@ -22,9 +22,9 @@ services:
       # Se trabaja con un usuario no root
       # Alpine no trae curl, solo wget
       test: ["CMD-SHELL", "wget -S -O - http://localhost:8888/shopping-cart-app/dev"]
-      interval: 7s
-      timeout: 0s
-      retries: 0
+      interval: 15s
+      timeout: 8s
+      retries: 5
 
 
   discovery:
@@ -54,9 +54,9 @@ services:
       # https://gist.github.com/sarath-soman/5d9aec06953bbd0990c648605d4dba07
       # La imagen de Keycloak no incluye wget ni curl
       test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_OK == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:8080/']
-      interval: 12s
-      timeout: 6s
-      retries: 3
+      interval: 25s
+      timeout: 13s
+      retries: 5
 
 
   users:
@@ -76,9 +76,9 @@ services:
       #test: [ "CMD-SHELL", "wget -S -O - http://localhost:9001/" ]
       # Intentado con wget y awk, pero esta solución parece mejor
       test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_UNAUTHORIZED == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9001/']
-      interval: 7s
-      timeout: 4s
-      retries: 3
+      interval: 30s
+      timeout: 15s
+      retries: 5
 
 
 
@@ -97,9 +97,9 @@ services:
 
     healthcheck:
       test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_UNAUTHORIZED == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9000/']
-      interval: 7s
-      timeout: 4s
-      retries: 3
+      interval: 30s
+      timeout: 15s
+      retries: 5
 
   gateway:
     image: digitar120/gateway
