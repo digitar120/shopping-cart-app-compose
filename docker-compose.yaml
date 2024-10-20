@@ -22,8 +22,8 @@ services:
       # Se trabaja con un usuario no root
       # Alpine no trae curl, solo wget
       test: ["CMD-SHELL", "wget -S -O - http://localhost:8888/shopping-cart-app/dev"]
-      interval: 15s
-      timeout: 8s
+      interval: 30s
+      timeout: 15s
       retries: 5
 
 

@@ -32,9 +32,11 @@ Emplea una variedad de conceptos y utilidades:
   - https://github.com/digitar120/discovery-service
 
 # Cómo probar la aplicación
+*Este Compose es trabajo en progreso. La composición arranca, pero hay servicios que no se conectan entre sí.*
+
 Se puede ejecutar la composición con `docker compose up` en cualquier plataforma.
 
-**Por ahora, el API Gateway solo autentica por usuario y contraseña en el navegador. También tengo que resolver un problema con las redirecciones, ya que genera un error al autenticar. Planeo exponer los endpoints de Swagger, lo que obviaría todo lo siguiente.**
+*Por ahora, el API Gateway solo autentica por usuario y contraseña en el navegador. También tengo que resolver un problema con las redirecciones, ya que genera un error al autenticar. Planeo exponer los endpoints de Swagger, lo que obviaría todo lo siguiente.*
 
 Se pueden probar los endpoints directamente con Postman ([o con éste Gist](https://gist.github.com/digitar120/ca652cd8c925785da6ffc4ee00e074e7), usando Bash y [la herramienta JQ](https://jqlang.github.io/jq/))
 
@@ -78,6 +80,7 @@ También dejo la lista de todos los endpoints:
 - [Users](https://github.com/digitar120/users-app/blob/main/src/main/java/com/digitar120/usersapp/controller/UserController.java)
 
 # Pendientes
+- Docker: Networking entre contenedores.
 - Gateway
   - Exponer endpoints de Swagger de los servicios de usuarios y carritos
   - Permitir llamadas por herramientas como Postman
