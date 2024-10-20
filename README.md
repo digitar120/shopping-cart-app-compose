@@ -77,5 +77,13 @@ También dejo la lista de todos los endpoints:
 - [Shopping Cart](https://github.com/digitar120/shopping-cart-app/tree/dev/src/main/java/com/digitar120/shoppingcartapp/controller)
 - [Users](https://github.com/digitar120/users-app/blob/main/src/main/java/com/digitar120/usersapp/controller/UserController.java)
 
+# Pendientes
+- Gateway
+  - Exponer endpoints de Swagger de los servicios de usuarios y carritos
+  - Permitir llamadas por herramientas como Postman
+  - Mover configuración al servicio afín
+- Resolver una falla de FeignClient relacionada a fallbacks y CircuitBreaker
+- Pruebas unitarias para la capa de controlador
+- Pruebas de integración
 
 ***¡Gracias por ver!***
