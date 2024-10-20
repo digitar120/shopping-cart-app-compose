@@ -36,7 +36,7 @@ Se puede ejecutar la composición con `docker compose up` en cualquier plataform
 
 **Por ahora, el API Gateway solo autentica por usuario y contraseña en el navegador. También tengo que resolver un problema con las redirecciones, ya que genera un error al autenticar. Planeo exponer los endpoints de Swagger, lo que obviaría todo lo siguiente.**
 
-Se pueden probar los dos endpoints principales llamándolos directamente con la siguiente información en Postman (estoy al tanto de que publicar secretos no es correcto):
+Se pueden probar los endpoints directamente con Postman ([o con éste Gist](https://gist.github.com/digitar120/ca652cd8c925785da6ffc4ee00e074e7), usando Bash y [la herramienta JQ](https://jqlang.github.io/jq/))
 
 - Authorization -> Type: OAuth2
 - Access Token URL: http://host.docker.internal:9090/realms/digitar120-shopping-cart-project-realm/protocol/openid-connect/token
@@ -47,11 +47,7 @@ Los servicios se alojan en:
 - host.docker.internal:9000 (carritos)
 - host.docker.internal:9001 (usuarios)
 
-Dejo enlaces a las clases de controlador, que detallan todos los endpoints:
-- [Shopping Cart](https://github.com/digitar120/shopping-cart-app/tree/dev/src/main/java/com/digitar120/shoppingcartapp/controller)
-- [Users](https://github.com/digitar120/users-app/blob/main/src/main/java/com/digitar120/usersapp/controller/UserController.java)
-
-Y también algunos endpoints rápidos:
+Algunos endpoints rápidos:
 - GET /cart
   - Lista todos los carritos
 - GET /cart/by-userid/{userId}
@@ -76,3 +72,10 @@ Y también algunos endpoints rápidos:
   - En un carrito, añade un producto o actualiza su cantidad.
   - Puede probar `/cart/1/product/1/quantity/15`
 
+
+También dejo la lista de todos los endpoints:
+- [Shopping Cart](https://github.com/digitar120/shopping-cart-app/tree/dev/src/main/java/com/digitar120/shoppingcartapp/controller)
+- [Users](https://github.com/digitar120/users-app/blob/main/src/main/java/com/digitar120/usersapp/controller/UserController.java)
+
+
+***¡Gracias por ver!***
