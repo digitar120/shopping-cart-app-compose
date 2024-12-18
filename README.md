@@ -22,26 +22,29 @@ Emplea una variedad de conceptos y utilidades:
 - Una API Gateway
   - https://github.com/digitar120/api-gateway
 - Servicio de carrito de compras:
-  - El componente principal. Administra carritos, items y productos
+  - El componente principal. Administra carritos, items y productos.
   - https://github.com/digitar120/shopping-cart-app
 - Servicio de usuarios
   - Un servicio secundario. Principalmente, sirve para implementar conexiones con FeignClient. Aloja usuarios.
   - https://github.com/digitar120/users-app
-- Un servicio de autenticación Keycloak
+- Un servicio de autenticación Keycloak.
   - https://hub.docker.com/r/digitar120/auth
+    - Imágen de Keycloak preconfigurada.
 - Un servicio RabbitMQ.
-- Un servidor de configuración Spring Cloud Config
-  - https://github.com/digitar120/config-server-public.
-  - Configurado para apuntar a https://github.com/digitar120/service-configuration-public.
+- Un servidor de configuración Spring Cloud Config.
+  - https://github.com/digitar120/config-server-public
+  - Configurado para apuntar a https://github.com/digitar120/service-configuration-public
 - Un Discovery Service (Eureka).
   - https://github.com/digitar120/discovery-service
 
 ## Cómo probar la aplicación
 *Este Compose es trabajo en progreso. La composición arranca, pero hay servicios que no se conectan entre sí.*
 
-Se puede ejecutar la composición con `docker compose up` en cualquier plataforma.
-
 *Por ahora, el API Gateway solo autentica por usuario y contraseña en el navegador. También tengo que resolver un problema con las redirecciones, ya que genera un error al autenticar. Planeo exponer los endpoints de Swagger, lo que obviaría todo lo siguiente.*
+
+---
+
+Se puede ejecutar la composición con `docker compose up` en cualquier plataforma.
 
 Se pueden probar los endpoints directamente, sin pasar por la Gateway, con Postman ([o con éste Gist](https://gist.github.com/digitar120/ca652cd8c925785da6ffc4ee00e074e7), usando Bash y [la herramienta JQ](https://jqlang.github.io/jq/))
 
@@ -51,12 +54,12 @@ Se pueden probar los endpoints directamente, sin pasar por la Gateway, con Postm
 - Client secret: Cl9WL7FhnazS9uDPmdmVarAehvyr44ek
 
 Los servicios se alojan en:
-- localhost:9000 (carritos)
-- localhost:9001 (usuarios)
+- localhost:9000 (carritos).
+- localhost:9001 (usuarios).
 
 Algunos endpoints rápidos:
 - GET /cart
-  - Lista todos los carritos
+  - Lista todos los carritos.
 - GET /cart/by-userid/{userId}
   - Lista todos los carritos pertenecientes a un usuario.
   - Realiza una llamada a Usuarios.
@@ -125,10 +128,11 @@ The application employs a variety of concepts and utilities:
   - https://github.com/digitar120/users-app
 - Keycloak authentication service
   - https://hub.docker.com/r/digitar120/auth
+    - Preconfigured Keycloak image.
 - RabbitMQ message broker
 - Spring Cloud Config service
   - https://github.com/digitar120/config-server-public.
-  - Configured to draw data from https://github.com/digitar120/service-configuration-public.
+  - Configured to draw data from https://github.com/digitar120/service-configuration-public
 - An Eureka discovery service
   - https://github.com/digitar120/discovery-service
 
@@ -136,9 +140,11 @@ The application employs a variety of concepts and utilities:
 
 *This Compose file is a WIP. The application succesfully runs, but there are services that do not communicate with their peers.*
 
-This file can be run on any platform, issuing `docker compose up`.
-
 *At the moment, the API Gateway only authenticates users via a browser. I also have to fix a problem with redirections to the authentication service.*
+
+---
+
+This file can be run on any platform, issuing `docker compose up`.
 
 The endpoints can be tested directly (without calling to the Gateway) with Postman. You can also use [this Gist](https://gist.github.com/digitar120/ca652cd8c925785da6ffc4ee00e074e7), which uses cURL, Bash and [JQ](https://jqlang.github.io/jq/). Use these settings:
 
@@ -192,4 +198,4 @@ You can find the full list of endpoins in the source code:
 - Unit tests for the controller layer.
 - Integration tests.
 
-***¡Gracias por ver!***
+***Thanks for reading!***
