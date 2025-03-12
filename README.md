@@ -17,6 +17,7 @@ Emplea una variedad de conceptos y utilidades:
 - Pruebas unitarias
 - Conexiones entre microservicios con FeignClient
 - Open API / Swagger
+- JavaDocs
 
 ## Componentes de la aplicación
 - Una API Gateway
@@ -115,6 +116,7 @@ The application employs a variety of concepts and utilities:
 - Unit tests
 - Feign Client connections
 - Open API / Swagger
+- JavaDocs
 
 
 ## Application components
