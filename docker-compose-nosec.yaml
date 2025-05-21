@@ -1,0 +1,95 @@
+x-common-variables: &common-variables
+
+
+  CONFIG_SERVER_IP: config
+  CONFIG_SERVER_PORT: 8888
+
+  EUREKA_IP: discovery
+  EUREKA_PORT: 8761
+
+  RABBITMQ_IP: interservice-messaging
+  RABBITMQ_PORT: 5672
+
+
+services:
+
+
+  config:
+    image: digitar120/config-public
+    ports:
+      - '8888:8888'
+    healthcheck:
+      # Se trabaja con un usuario no root
+      # Alpine no trae curl, solo wget
+      test: ["CMD-SHELL", "wget -S -O - http://localhost:8888/shopping-cart-app/dev"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+
+  discovery:
+    image: digitar120/discovery
+    ports:
+      - '8761:8761'
+
+  interservice-messaging:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
+
+  users:
+    image: digitar120/users-nosec
+    ports:
+      - '9001:9001'
+    environment:
+      <<: *common-variables
+
+    depends_on:
+      config:
+        condition: service_healthy
+
+    healthcheck:
+      #test: [ "CMD-SHELL", "wget -S -O - http://localhost:9001/" ]
+      # Intentado con wget y awk, pero esta solución parece mejor
+      test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_NOT_FOUND == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9001/']
+      interval: 30s
+      timeout: 15s
+      retries: 5
+
+  shopping-cart:
+    # Image for redirection testing
+    image: digitar120/shopping-cart-nosec
+    ports:
+      - '9000:9000'
+    environment:
+      <<: *common-variables
+      APPPORT: 9000
+    depends_on:
+      config:
+        condition: service_healthy
+
+    healthcheck:
+      test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_NOT_FOUND == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9000/']
+      interval: 30s
+      timeout: 15s
+      retries: 5
+
+  gateway:
+    image: digitar120/gateway-nosec
+    ports:
+      - '8080:8080'
+    environment:
+      <<: *common-variables
+      REDIRECT_URI: host.docker.internal
+      REDIRECT_PORT: 9090
+
+      CARTS_IP: host.docker.internal
+      CARTS_PORT: 9000
+
+      USERS_IP: host.docker.internal
+      USERS_PORT: 9001
+
+#    depends_on:
+#      shopping-cart:
+#        condition: service_healthy
+#      users:
+#        condition: service_healthy
