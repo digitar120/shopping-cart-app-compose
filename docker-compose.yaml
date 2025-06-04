@@ -13,7 +13,6 @@ x-common-variables: &common-variables
 
 services:
 
-
   config:
     image: digitar120/config-public
     ports:
@@ -26,18 +25,15 @@ services:
       timeout: 15s
       retries: 5
 
-
   discovery:
     image: digitar120/discovery
     ports:
       - '8761:8761'
 
-
   interservice-messaging:
     image: rabbitmq
     ports:
       - '5672:5672'
-
 
   auth:
     image: digitar120/auth
@@ -57,7 +53,6 @@ services:
       interval: 25s
       timeout: 13s
       retries: 5
-
 
   users:
     image: digitar120/users
@@ -79,8 +74,6 @@ services:
       interval: 30s
       timeout: 15s
       retries: 5
-
-
 
   shopping-cart:
     image: digitar120/shopping-cart
