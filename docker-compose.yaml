@@ -11,6 +11,10 @@ x-common-variables: &common-variables
   RABBITMQ_IP: host.docker.internal
   RABBITMQ_PORT: 5672
 
+x-extra_hosts:
+  &default-extra_hosts
+  - "host.docker.internal:172.17.0.1"
+
 services:
 
   config:
@@ -24,16 +28,19 @@ services:
       interval: 30s
       timeout: 15s
       retries: 5
+    extra_hosts: *default-extra_hosts
 
   discovery:
     image: digitar120/discovery
     ports:
       - '8761:8761'
+    extra_hosts: *default-extra_hosts
 
   interservice-messaging:
     image: rabbitmq
     ports:
       - '5672:5672'
+    extra_hosts: *default-extra_hosts
 
   auth:
     image: digitar120/auth
@@ -53,6 +60,7 @@ services:
       interval: 25s
       timeout: 13s
       retries: 5
+    extra_hosts: *default-extra_hosts
 
   users:
     image: digitar120/users
@@ -74,6 +82,7 @@ services:
       interval: 30s
       timeout: 15s
       retries: 5
+    extra_hosts: *default-extra_hosts
 
   shopping-cart:
     image: digitar120/shopping-cart
@@ -93,6 +102,7 @@ services:
       interval: 30s
       timeout: 15s
       retries: 5
+    extra_hosts: *default-extra_hosts
 
   gateway:
     image: digitar120/gateway
@@ -105,3 +115,4 @@ services:
         condition: service_healthy
       users:
         condition: service_healthy
+    extra_hosts: *default-extra_hosts
