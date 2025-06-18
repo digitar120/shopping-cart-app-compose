@@ -88,8 +88,8 @@ services:
       USERS_IP: host.docker.internal
       USERS_PORT: 9001
 
-#    depends_on:
-#      shopping-cart:
-#        condition: service_healthy
-#      users:
-#        condition: service_healthy
+    depends_on:
+      shopping-cart:
+        condition: service_healthy
+      users:
+        condition: service_healthy
