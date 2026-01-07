@@ -14,23 +14,13 @@ An easy-to-try, well documented Spring-based REST API that manages carts, items,
 # Application components
 ![Diagram](Diagram.png)
 
-- An API Gateway
-  - https://github.com/digitar120/api-gateway
-- Shopping cart service
-  - The main component, managing carts, items and products
-  - https://github.com/digitar120/shopping-cart-app
-- User service
-  - A secondary service, mainly useful for implementing FeignClient connections. Manages user entries.
-  - https://github.com/digitar120/users-app
-- Keycloak authentication service
-  - https://hub.docker.com/r/digitar120/auth
-    - Preconfigured Keycloak image.
-- RabbitMQ message broker
-- Spring Cloud Config service
-  - https://github.com/digitar120/config-server-public.
-  - Configured to draw data from https://github.com/digitar120/service-configuration-public
-- An Eureka discovery service
-  - https://github.com/digitar120/discovery-service
+- An [API gateway](https://github.com/digitar120/api-gateway).
+- A [shopping cart service](https://github.com/digitar120/shopping-cart-app) as the main component, managing carts, items and products.
+- A secondary [user service](https://github.com/digitar120/users-app), mainly useful for implementing FeignClient connections. Manages user entries.
+- A preconfigured [Keycloak authentication service](https://hub.docker.com/r/digitar120/auth).
+- A RabbitMQ message broker
+- A [Spring Cloud Config instance](https://github.com/digitar120/config-server-public), configured to draw data from [here](https://github.com/digitar120/service-configuration-public).
+- A [Eureka discovery service](https://github.com/digitar120/discovery-service)
 
 # How to try it out
 
@@ -49,15 +39,15 @@ For this non-secured branch, you can either call with Postman/cURL, or use the S
 The main services are at:
 - localhost:9000 (carts).
 - localhost:9001 (users).
+- localhost:8080 (gateway).
 
-If you prefer to use an HTTP client, some quick endpoints to try are:
+If you prefer to use an HTTP client, some quick endpoints to try (on the gateway, at 8080) are:
 - GET /api-docs/cart --- GET /api-docs/user
   - API Docs endpoint for the main microservices
 - GET /cart
   - Lists all carts.
 - GET /cart/by-userid/{userId}
-  - Lists all carts belonging to an user.
-  - Calls the Users service.
+  - Lists all carts belonging to a user, after calling the Users service.
   - Use `userId` 36693120.
 - POST /cart
   - Creates a new cart. It takes JSON data with the following parameters:
