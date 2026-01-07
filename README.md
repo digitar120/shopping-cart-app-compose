@@ -42,7 +42,7 @@ Each of those have a Windows-compatible version and a Linux-compatible version.
 
 ## `base`
 
-For this non-secured branch, you can either call with Postman/cURL, or use the Swagger endpoints:
+For this non-secured branch, you can either call with Postman/cURL, or use the Swagger endpoints. **If you're running Linux, ensure that your `/etc/hosts` file has a mapping for `host.docker.internal` to `127.0.0.1`**:
 - http://localhost:8080/swagger/cart
 - http://localhost:8080/swagger/user
 
